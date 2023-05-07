@@ -1,0 +1,13 @@
+C:\Users\brian\Desktop\ynot_emailer\bin\Debug\net7.0\publish\ynot_emailer.exe
+C:\Users\brian\Desktop\ynot_emailer\bin\Debug\net7.0\publish\selenium-manager\linux\selenium-manager
+C:\Users\brian\Desktop\ynot_emailer\bin\Debug\net7.0\publish\selenium-manager\macos\selenium-manager
+C:\Users\brian\Desktop\ynot_emailer\bin\Debug\net7.0\publish\selenium-manager\windows\selenium-manager.exe
+C:\Users\brian\Desktop\ynot_emailer\bin\Debug\net7.0\publish\ynot_emailer.dll
+C:\Users\brian\Desktop\ynot_emailer\bin\Debug\net7.0\publish\ynot_emailer.deps.json
+C:\Users\brian\Desktop\ynot_emailer\bin\Debug\net7.0\publish\ynot_emailer.runtimeconfig.json
+C:\Users\brian\Desktop\ynot_emailer\bin\Debug\net7.0\publish\ynot_emailer.pdb
+C:\Users\brian\Desktop\ynot_emailer\bin\Debug\net7.0\publish\AngleSharp.dll
+C:\Users\brian\Desktop\ynot_emailer\bin\Debug\net7.0\publish\Newtonsoft.Json.dll
+C:\Users\brian\Desktop\ynot_emailer\bin\Debug\net7.0\publish\WebDriver.dll
+C:\Users\brian\Desktop\ynot_emailer\bin\Debug\net7.0\publish\ICSharpCode.SharpZipLib.dll
+C:\Users\brian\Desktop\ynot_emailer\bin\Debug\net7.0\publish\WebDriverManager.dll

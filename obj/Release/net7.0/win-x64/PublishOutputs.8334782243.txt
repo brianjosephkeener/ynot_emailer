@@ -1,0 +1,5 @@
+C:\Users\brian\Desktop\ynot_emailer\bin\Release\net7.0\win-x64\publish\ynot_emailer.pdb
+C:\Users\brian\Desktop\ynot_emailer\bin\Release\net7.0\win-x64\publish\selenium-manager\linux\selenium-manager
+C:\Users\brian\Desktop\ynot_emailer\bin\Release\net7.0\win-x64\publish\selenium-manager\macos\selenium-manager
+C:\Users\brian\Desktop\ynot_emailer\bin\Release\net7.0\win-x64\publish\selenium-manager\windows\selenium-manager.exe
+C:\Users\brian\Desktop\ynot_emailer\bin\Release\net7.0\win-x64\publish\ynot_emailer.exe
