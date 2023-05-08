@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Edge;
 using System.Threading;
@@ -48,6 +48,7 @@ class Program
             FilterByLocation.SendKeys(Keys.Enter);
         }
         // Program Input
+        Thread.Sleep(1000);
         IWebElement SearchByProgramInput = wait.Until(driver => driver.FindElement(By.Id("s2id_autogen4")));
         foreach (string item in programSelection.ProgramsSelected)
         {
@@ -93,8 +94,11 @@ class Program
                 IReadOnlyCollection<IWebElement> navigationBar = driver.FindElements(By.ClassName("pagination"));
                 IReadOnlyCollection<IWebElement> communicationFailedPopUp = driver.FindElements(By.XPath("//*[contains(text(),'Send Communication failed')]"));
                 string ariaHiddenValue = nextPage.GetAttribute("aria-hidden");
-                if(ariaHiddenValue == "true" || navigationBar.Count == 0 || communicationFailedPopUp.Count == 0)
+                if(ariaHiddenValue == "true" || navigationBar.Count == 0 || communicationFailedPopUp.Count == 1)
                 {
+                    Console.WriteLine("ariaHiddenValue = " + ariaHiddenValue);
+                    Console.WriteLine($"navigationBar.Count = {navigationBar.Count}");
+                    Console.WriteLine($"communicationFailedPopUp.Count = {communicationFailedPopUp.Count}");
                     Console.WriteLine("All Done!");
                     Environment.Exit(0);
                 }
@@ -106,7 +110,7 @@ class Program
             }
             catch (NoSuchElementException)
             {
-                Console.WriteLine("ALL DONE :)");
+                Console.WriteLine("All Done!");
                 driver.Quit();
             }
             catch (UnhandledAlertException)
