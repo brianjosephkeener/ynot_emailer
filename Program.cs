@@ -3,8 +3,26 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Edge;
 using System.Threading;
 using OpenQA.Selenium.Support.UI;
-using OpenQA.Selenium.Interactions;
 using System.Collections.Generic;
+
+/*
+
+TODO:
+
+1. check page link 
+<span class="page-link">200</span>
+
+2. 
+check 
+
+last row of tbody 
+OR 
+<td class="Created"> Apr 16, 2018 8:15pm </td>
+
+
+3. Once information is taken, put in next previous date to avoid overlap 
+Example Apr 15, 2018
+*/
 
 class Program 
 {
@@ -77,6 +95,7 @@ class Program
         DateRange.SendKeys(Keys.Enter);
 //  wait.Until(ExpectedConditions.ElementToBeClickable(By.CssSelector("div.my-class")));
         bool alertPresent = false;
+        bool emailClicked = false;
         while (true)
         {
             IWebElement allLeadsBx = wait.Until(driver => driver.FindElement(By.Id("allleads")));
@@ -86,19 +105,28 @@ class Program
             js.ExecuteScript("arguments[0].setAttribute('style', 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); display: block; font-size: 64px')", email);
             js.ExecuteScript("document.body.appendChild(arguments[0].parentNode.removeChild(arguments[0]))", email);
             Thread.Sleep(3000);
-            email.Click(); 
+            // email.Click();
             // ›
-            Thread.Sleep(3000);
+            // Thread.Sleep(3000);
             try {
+                
+                if(emailClicked == false)
+                {
+                    // Console.WriteLine("SENDING EMAIL");
+                    email.Click();
+                    emailClicked = true;
+                }
+                Thread.Sleep(3000);
                 IWebElement? nextPage = driver.FindElement(By.XPath("//*[text()='›']"));
                 IReadOnlyCollection<IWebElement> navigationBar = driver.FindElements(By.ClassName("pagination"));
                 IReadOnlyCollection<IWebElement> communicationFailedPopUp = driver.FindElements(By.XPath("//*[contains(text(),'Send Communication failed')]"));
+                IReadOnlyCollection<IWebElement> filterDangerPopUp = driver.FindElements(By.XPath("//*[contains(text(),'Invalid filters, please check your search criteria.')]"));
                 string ariaHiddenValue = nextPage.GetAttribute("aria-hidden");
-                if(ariaHiddenValue == "true" || navigationBar.Count == 0 || communicationFailedPopUp.Count == 1)
+                if(ariaHiddenValue == "true" || navigationBar.Count == 0 || communicationFailedPopUp.Count == 1 || filterDangerPopUp.Count == 1)
                 {
-                    Console.WriteLine("ariaHiddenValue = " + ariaHiddenValue);
-                    Console.WriteLine($"navigationBar.Count = {navigationBar.Count}");
-                    Console.WriteLine($"communicationFailedPopUp.Count = {communicationFailedPopUp.Count}");
+                    // Console.WriteLine("ariaHiddenValue = " + ariaHiddenValue);
+                    // Console.WriteLine($"navigationBar.Count = {navigationBar.Count}");
+                    // Console.WriteLine($"communicationFailedPopUp.Count = {communicationFailedPopUp.Count}");
                     Console.WriteLine("All Done!");
                     Environment.Exit(0);
                 }
@@ -107,6 +135,8 @@ class Program
                 js.ExecuteScript("document.body.appendChild(arguments[0].parentNode.removeChild(arguments[0]))", nextPage);
 
                 nextPage.Click();
+                wait.Until(driver => ((IJavaScriptExecutor)driver).ExecuteScript("return document.readyState").Equals("complete"));
+                emailClicked = false;
             }
             catch (NoSuchElementException)
             {
@@ -117,8 +147,11 @@ class Program
             {
                 try
                 {
+                    // get rid of alert
+                    // Console.WriteLine("UnhandledAlertException");
                     alertPresent = true;
                     driver.SwitchTo().Alert().Accept();
+
                 }
                 catch (NoAlertPresentException)
                 {
